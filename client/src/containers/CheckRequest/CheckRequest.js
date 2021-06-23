@@ -1,153 +1,325 @@
-import React from "react";
+import React, { useState } from "react";
+import Input from "../../components/UI/Input/Input";
 
-const CheckRequest = () => (
-  <>
-    <h2 className="text-center">RB Community Church Check Request</h2>
-    <div className="flex items-center">
-      <label htmlFor="date" className="text-sm font-medium text-gray-700">
-        Today's Date
-      </label>
-      <div className="rounded-md shadow-sm">
-        <input
-          type="date"
-          name="date"
-          id="date"
-          className="focus:ring-indigo-500 focus:border-indigo-500 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-        />
-      </div>
-    </div>
-    <div className="flex items-center mt-1">
-      <label
-        htmlFor="checkAmount"
-        className="text-sm font-medium text-gray-700"
-      >
-        Check Amount
-      </label>
-      <div className="relative rounded-md shadow-sm">
-        <div className="absolute inset-y-0 left -0 pl-3 flex items-center pointer-events-none">
-          <span className="text-gray-500 sm:text-sm">$</span>
-        </div>
-        <input
-          type="text"
-          name="checkAmount"
-          id="checkAmount"
-          className="focus:ring-indigo-500 focus:border-indigo-500 block pl-7 pr-12 sm:text-sm border-gray-300 rounded.md"
-          placeholder="0.00"
-        />
-      </div>
-    </div>
-    <div className="flex items-center mt-1">
-      <label
-        htmlFor="checkPayableTo"
-        className="text-sm font-medium text-gray-700"
-      >
-        Check Payable To
-      </label>
-      <div className="relative rounded-md shadow-sm">
-        <input
-          type="text"
-          name="checkPayableTo"
-          id="checkPayableTo"
-          className="focus:ring-indigo-500 focus:border-indigo-500 block pl-7 pr-12 sm:text-sm border-gray-300 rounded.md"
-          placeholder="Martin Luther"
-        />
-      </div>
-    </div>
-    <div className="grid grid-cols-6 gap-6 mt-1">
-      <div class="col-span-6">
-        <label
-          for="street_address"
-          class="block text-sm font-medium text-gray-700"
-        >
-          Street address
-        </label>
-        <input
-          type="text"
-          name="street_address"
-          id="street_address"
-          autocomplete="street-address"
-          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-        />
-      </div>
+const CheckRequest = () => {
+  const [checkRequestForm, setCheckRequestForm] = useState({
+    requestDate: {
+      elementType: "input",
+      elementConfig: {
+        type: "date",
+        // placeholder: "Today's Date",
+        label: "Today's Date",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    checkAmount: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Check Amount",
+        label: "Check Amount",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    checkPayableTo: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Martin Luther",
+        label: "Check Payable To",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    checkPayableToStreet: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "123 Main St.",
+        label: "Street Address",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    checkPayableToCity: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Portland",
+        label: "City",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    checkPayableToState: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "OR",
+        label: "State",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    checkPayableToZip: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "93653",
+        label: "Zip Code",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    expenses: {
+      elementType: "array",
+      elementConfig: {
+        type: "text",
+        placeholder: "93653",
+        label: "Zip Code",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    mailCheckToCheckPayableAddress: {
+      elementType: "input",
+      elementConfig: {
+        type: "checkbox",
+        // placeholder: "93653",
+        label: "Mail check to above address",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    returnCheckToRequestor: {
+      elementType: "input",
+      elementConfig: {
+        type: "checkbox",
+        // placeholder: "93653",
+        label: "Return check to requestor",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    allReceiptsAttached: {
+      elementType: "input",
+      elementConfig: {
+        type: "checkbox",
+        // placeholder: "93653",
+        label: "All receipts attached",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    allReceiptsToFollow: {
+      elementType: "input",
+      elementConfig: {
+        type: "checkbox",
+        // placeholder: "93653",
+        label: "All receipts to follow",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    noReceiptsPossible: {
+      elementType: "input",
+      elementConfig: {
+        type: "checkbox",
+        // placeholder: "93653",
+        label: "No receipts possible",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    independentContractor: {
+      elementType: "input",
+      elementConfig: {
+        type: "checkbox",
+        // placeholder: "93653",
+        label: "Independent Contractor",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    completedW9FormAttached: {
+      elementType: "input",
+      elementConfig: {
+        type: "checkbox",
+        // placeholder: "93653",
+        label: "Completed W-9 Form Attached",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    contractOngoing: {
+      elementType: "input",
+      elementConfig: {
+        type: "checkbox",
+        // placeholder: "93653",
+        label: "Contract Ongoing/W-9 on file",
+      },
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+    },
+  });
+  const [formIsValid, setFormIsValid] = useState(false);
 
-      <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-        <label for="city" class="block text-sm font-medium text-gray-700">
-          City
-        </label>
-        <input
-          type="text"
-          name="city"
-          id="city"
-          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-        />
-      </div>
+  const checkValidity = (value, rules) => {
+    let isValid = true;
+    if (rules.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
 
-      <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-        <label for="state" class="block text-sm font-medium text-gray-700">
-          State / Province
-        </label>
-        <input
-          type="text"
-          name="state"
-          id="state"
-          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-        />
-      </div>
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
 
-      <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-        <label
-          for="postal_code"
-          class="block text-sm font-medium text-gray-700"
-        >
-          ZIP / Postal
-        </label>
-        <input
-          type="text"
-          name="postal_code"
-          id="postal_code"
-          autocomplete="postal-code"
-          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid;
+    }
+    return isValid;
+  };
+
+  const inputChangedHandler = (event, inputIdentifier) => {
+    // const updatedFormElement = updateObject(checkRequestForm[inputIdentifier], {
+    //   value: event.target.value,
+    //   valid: checkValidity(
+    //     event.target.value,
+    //     checkRequestForm[inputIdentifier].validation
+    //   ),
+    //   touched: true,
+    // });
+
+    const updatedFormElement = {
+      ...checkRequestForm[inputIdentifier],
+      ...{
+        value: event.target.value,
+        valid: checkValidity(
+          event.target.value,
+          checkRequestForm[inputIdentifier].validation
+        ),
+        touched: true,
+      },
+    };
+
+    // const updatedCheckRequestForm = updateObject(checkRequestForm, {
+    //   [inputIdentifier]: updatedFormElement,
+    // });
+
+    const updatedCheckRequestForm = {
+      ...checkRequestForm,
+      ...{
+        [inputIdentifier]: updatedFormElement,
+      },
+    };
+
+    // console.log(updatedFormElement);
+    let formIsValid = true;
+    for (let inputIdentifier in updatedCheckRequestForm) {
+      formIsValid =
+        updatedCheckRequestForm[inputIdentifier].valid && formIsValid;
+    }
+    setCheckRequestForm(updatedCheckRequestForm);
+    setFormIsValid(formIsValid);
+  };
+
+  const formElementsArray = [];
+  for (let key in checkRequestForm) {
+    formElementsArray.push({
+      id: key,
+      config: checkRequestForm[key],
+    });
+  }
+  let form = (
+    <form onSubmit={console.log("SUBMIT")}>
+      {formElementsArray.map((formElement) => (
+        <Input
+          key={formElement.id}
+          elementType={formElement.config.elementType}
+          elementConfig={formElement.config.elementConfig}
+          value={formElement.config.value}
+          invalid={!formElement.config.valid}
+          shouldValidate={formElement.config.validation}
+          touched={formElement.config.touched}
+          changed={(event) => inputChangedHandler(event, formElement.id)}
+          label={formElement.config.elementConfig.label}
         />
-      </div>
-    </div>
-    <div>//////////////////////</div>
-    <div className="flex items-start">
-      <div className="flex items-center h-5">
-        <input
-          type="checkbox"
-          name="mailCheckToCheckPayableAddress"
-          id="mailCheckToCheckPayableAddress"
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-        />
-      </div>
-      <div className="ml-3 text-sm">
-        <label
-          htmlFor="mailCheckToCheckPayableAddress"
-          className="font-medium text-gray-700"
-        >
-          Mail check to above address
-        </label>
-      </div>
-    </div>
-    <div className="flex items-start">
-      <div className="flex items-center h-5">
-        <input
-          type="checkbox"
-          name="returnCheckToRequestor"
-          id="returnCheckToRequestor"
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-        />
-      </div>
-      <div className="ml-3 text-sm">
-        <label
-          htmlFor="returnCheckToRequestor"
-          className="font-medium text-gray-700"
-        >
-          Return check to requestor
-        </label>
-      </div>
-    </div>
-  </>
-);
+      ))}
+    </form>
+  );
+
+  return (
+    <>
+      <h2 className="text-center">RB Community Church Check Request</h2>
+      {form}
+    </>
+  );
+};
 
 export default CheckRequest;
